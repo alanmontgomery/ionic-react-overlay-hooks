@@ -1,7 +1,21 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Page.css';
+import { IonButtons, IonContent, IonHeader, IonItem, IonListHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, IonList, useIonPopover, IonButton } from '@ionic/react';
 
 const Popover = () => {
+
+	const PopoverList = ({ onHide }) => (
+		<IonList>
+			<IonListHeader>Ionic</IonListHeader>
+			<IonItem button>Learn Ionic</IonItem>
+			<IonItem button>Documentation</IonItem>
+			<IonItem button>Showcase</IonItem>
+			<IonItem button>GitHub Repo</IonItem>
+			<IonItem lines="none" detail={false} button onClick={ onHide }>
+				Close
+			</IonItem>
+		</IonList>
+	);
+
+	const [ present, dismiss ] = useIonPopover(PopoverList, { onHide: () => dismiss() });
 
 	return (
 		<IonPage>
@@ -20,6 +34,17 @@ const Popover = () => {
                         <IonTitle size="large">Popover</IonTitle>
 					</IonToolbar>
 				</IonHeader>
+
+				<IonButton
+					expand="block"
+					onClick={(e) =>
+						present({
+							event: e.nativeEvent,
+						})
+					}
+				>
+					Show Popover
+				</IonButton>
 			</IonContent>
 		</IonPage>
 	);

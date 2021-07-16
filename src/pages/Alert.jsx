@@ -1,7 +1,8 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Page.css';
+import { IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 
 const Alert = () => {
+
+	const [ present ] = useIonAlert();
 
 	return (
 		<IonPage>
@@ -20,6 +21,30 @@ const Alert = () => {
                         <IonTitle size="large">Alert</IonTitle>
 					</IonToolbar>
 				</IonHeader>
+
+				<IonButton
+					expand="block"
+					onClick={() =>
+						present({
+							cssClass: 'my-css',
+							header: 'Alert',
+							message: 'alert from hook',
+							buttons: [
+								'Cancel',
+								{ text: 'Ok', handler: (d) => console.log('ok pressed') },
+							],
+							onDidDismiss: (e) => console.log('did dismiss'),
+						})
+					}
+				>
+					Show Alert
+				</IonButton>
+				<IonButton
+					expand="block"
+					onClick={() => present('hello with params', [{ text: 'Ok' }])}
+				>
+					Show Alert using params
+				</IonButton>
 			</IonContent>
 		</IonPage>
 	);

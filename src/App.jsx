@@ -2,7 +2,6 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
-import Page from './pages/Page';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -22,6 +21,14 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import All from './pages/All';
+import ActionSheet from './pages/ActionSheet';
+import Alert from './pages/Alert';
+import Loading from './pages/Loading';
+import Modal from './pages/Modal';
+import Picker from './pages/Picker';
+import Popover from './pages/Popover';
+import Toast from './pages/Toast';
 
 const App = () => {
 
@@ -30,42 +37,42 @@ const App = () => {
 		{
 			label: "All",
 			url: "/overlay/all",
-			component: ""
+			component: All
 		},
 		{
 			label: "Action Sheet",
 			url: "/overlay/action-sheet",
-			component: ""
+			component: ActionSheet
 		},
 		{
 			label: "Alert",
 			url: "/overlay/alert",
-			component: ""
+			component: Alert
 		},
 		{
 			label: "Loading",
 			url: "/overlay/loading",
-			component: ""
+			component: Loading
 		},
 		{
 			label: "Modal",
 			url: "/overlay/modal",
-			component: ""
+			component: Modal
 		},
 		{
 			label: "Picker",
 			url: "/overlay/picker",
-			component: ""
+			component: Picker
 		},
 		{
 			label: "Popover",
 			url: "/overlay/popover",
-			component: ""
+			component: Popover
 		},
 		{
 			label: "Toast",
 			url: "/overlay/toast",
-			component: ""
+			component: Toast
 		}
 	];
 	
@@ -73,7 +80,7 @@ const App = () => {
 		<IonApp>
 			<IonReactRouter>
 				<IonSplitPane contentId="main">
-					<Menu />
+					<Menu pages={ pages } />
 					<IonRouterOutlet id="main">
 						<Route path="/" exact={true}>
 							<Redirect to="/overlay/all" />
@@ -85,9 +92,7 @@ const App = () => {
 
 							return (
 
-								<Route path={ page.url } exact={ true }>
-									<pageComponent />
-								</Route>
+								<Route key={ index } path={ page.url } exact={ true } component={ pageComponent } />
 							);
 						})}
 					</IonRouterOutlet>

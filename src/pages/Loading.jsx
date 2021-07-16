@@ -1,7 +1,8 @@
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Page.css';
+import { IonButton, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar, useIonLoading } from '@ionic/react';
 
 const Loading = () => {
+
+	const [ present ] = useIonLoading();
 
 	return (
 		<IonPage>
@@ -20,6 +21,23 @@ const Loading = () => {
                         <IonTitle size="large">Loading</IonTitle>
 					</IonToolbar>
 				</IonHeader>
+
+				<IonButton
+					expand="block"
+					onClick={() =>
+						present({
+							duration: 3000,
+						})
+					}
+				>
+					Show Loading
+				</IonButton>
+				<IonButton
+					expand="block"
+					onClick={() => present('Loading', 2000, 'dots')}
+				>
+					Show Loading using params
+				</IonButton>
 			</IonContent>
 		</IonPage>
 	);
